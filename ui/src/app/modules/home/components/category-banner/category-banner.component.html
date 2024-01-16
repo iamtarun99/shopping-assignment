@@ -1,0 +1,16 @@
+<main>
+    <button class="categories-container link-btn" [style.flex-direction]="isOdd ? 'row-reverse' : 'row'" *ngFor="
+    let category of categoriesData;
+    let i = index;
+    let isOdd = odd;
+    "
+    (click)="onExploreClick(category.id)" aria-labelledby="cat-label">
+        <article class="category-desc">
+            <h3 id="cat-label">{{ category?.name }}</h3>
+            <p>{{ category?.description }}</p>
+        </article>
+        <div>
+            <img src="assets{{ category.imageUrl }}" [alt]="category.name" />
+        </div>
+    </button>
+</main>

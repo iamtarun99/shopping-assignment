@@ -1,0 +1,29 @@
+<header class="wrapper">
+  <div class="logo">
+    <a routerLink="home"><img src="../../assets/static/images/logo.png" alt="header logo" /></a>
+  </div>
+  <nav>
+    <ul ngbNav [(activeId)]="activeId" #nav="ngbNav" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink routerLink="/home">Home</a>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink routerLink="/products">Products</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="header-right">
+    <ng-container *ngIf="isLoggedIn$ | async; else notLogged">
+      <button class="link-btn" (click)="logOut()">SignOut</button>
+      <button id="miniCartBtn" class="cart link-btn" (click)="onClickCart()">
+        <img src="assets/static/images/cart.svg" alt="cart image" class="cart-btn" />
+        <span id="itemsInCart">{{ noOfItems }} items</span>
+      </button>
+    </ng-container>
+    <ng-template #notLogged>
+      <button class="link-btn" (click)="logIn()">SignIn</button>
+      <button class="link-btn" (click)="register()">Register</button>
+    </ng-template>
+  </div>
+</header>

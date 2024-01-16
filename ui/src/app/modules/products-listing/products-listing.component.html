@@ -1,0 +1,34 @@
+<section class="product-list-wrapper">
+  <div class="sidebar" *ngIf="categoriesData$ | async as categoriesData" aria-label="Filter by Categories">
+      <div class="filterDropdown">
+          <select #flterd (change)="onSelectionChange(flterd.value == 'null' ? null : flterd.value)"
+           id="category" name="category" class="btn form-control" [(ngModel)]="currCategory">
+            <option value="null">All</option>
+            <option *ngFor="let category of categoriesData" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+      </div>
+      <div class="hide">
+        <div class="input-container" [ngClass]="{ checked: currCategory === null }">
+          <a href="javascript: void(0)" attr.aria-label="'All'" (click)="onSelectionChange(null)">
+            All</a>
+        </div>
+        <div class="input-container" [ngClass]="{ checked: currCategory === category.id }"
+          *ngFor="let category of categoriesData; let i = index">
+          <a href="javascript: void(0)" attr.aria-labelledby="category-type{{i}}"
+            (click)="onSelectionChange(category.id)">{{
+            category.name }}</a>
+        </div>
+      </div>
+  </div>
+  <div class="product-list-container">
+    <ul class="product-list-container-block">
+      <li class="product-card-element"
+        *ngFor="let product of (productsList$ | async | productListFilterPipe:currCategory)">
+        <app-product-card [product]="product">
+        </app-product-card>
+      </li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,10 @@
+<div class="core">
+  <app-header></app-header>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  <div *ngIf="showCart$ | async" id="myModal" class="modal">
+        <app-mini-cart-page ></app-mini-cart-page>
+    </div>
+  <app-footer></app-footer>
+</div>
